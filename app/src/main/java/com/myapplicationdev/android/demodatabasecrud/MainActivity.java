@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity
         Log.e(TAG + "in onActivityResult", resultCode + "," +  requestCode);
         if (requestCode == 9 && resultCode == RESULT_OK) {
             // Load Text View & List View to Display Notes
-            retrieveButton.performClick();
+            doRetrieve(isTextContentShown, isListContentShown);
         }
     }
 
