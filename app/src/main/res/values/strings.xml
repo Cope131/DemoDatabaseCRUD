@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DemoDatabaseCRUD</string>
+    <string name="insert_button">Insert</string>
+    <string name="edit_button">Edit</string>
+    <string name="retrieve_button">Retrieve</string>
+    <string name="hint_note_input">Note</string>
+</resources>
