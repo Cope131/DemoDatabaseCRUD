@@ -2,6 +2,7 @@ package com.myapplicationdev.android.demodatabasecrud;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -67,6 +68,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dbHelper.close();
                 break;
             case R.id.edit_button:
+                if (!notes.isEmpty()) {
+                    // Navigate to Edit Activity
+                    Intent intent = new Intent(this, EditActivity.class);
+                    intent.putExtra("note", notes.get(0));
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, "Retrieve notes first", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.retrieve_button:
                 notes.clear();

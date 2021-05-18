@@ -4,4 +4,8 @@
     <string name="edit_button">Edit</string>
     <string name="retrieve_button">Retrieve</string>
     <string name="hint_note_input">Note</string>
+    <string name="update_button">Update</string>
+    <string name="delete_button">Delete</string>
+    <string name="edit_note_id_value">ID</string>
+    <string name="edit_note_id_label">ID</string>
 </resources>

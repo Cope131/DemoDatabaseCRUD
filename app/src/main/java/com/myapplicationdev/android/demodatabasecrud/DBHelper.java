@@ -94,6 +94,24 @@ public class DBHelper extends SQLiteOpenHelper {
         return notes;
     }
 
+    public int updateNote(Note note) {
+        // new values
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_NOTE_CONTENT, note.getNoteContent());
+        // filter
+        String condition = String.format("%s = ?", COLUMN_ID);
+        String[] args = {note.getId() + ""};
+        // update - returns the affected rows
+        //        - < 1 no rows affected (updated)
+        //        - update all when args is null
+        SQLiteDatabase writableDatabase = getWritableDatabase();
+        int result = writableDatabase.update(TABLE_NOTE, contentValues, condition, args);
+        // close
+        writableDatabase.close();
+        Log.d(TAG + " in updateNote",  result + "");
+        return result;
+    }
+
 
 
 
