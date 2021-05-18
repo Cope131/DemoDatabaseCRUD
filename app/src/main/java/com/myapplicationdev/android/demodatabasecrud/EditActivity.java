@@ -23,6 +23,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private TextInputEditText noteContentTextInputEditText;
     private Button updateButton, deleteButton;
 
+    // Selected Note
     private Note data;
 
     @Override
@@ -33,7 +34,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         initViews();
 
         // Get Note Object
-        data = (Note) getIntent().getSerializableExtra("note");
+        data = (Note) getIntent().getSerializableExtra("data");
 
         // Set Text of Views
         noteIdTextView.setText("ID:\n" + data.getId());
@@ -52,24 +53,48 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        int id = v.getId();
+        switch (id) {
             case R.id.update_button:
-                String editNoteText = noteContentTextInputEditText.getText() + "";
-                if (!editNoteText.trim().isEmpty()) {
-                    data.setNoteContent(editNoteText);
-                    int result = dbHelper.updateNote(data);
-                    Log.d(TAG, "update result" + result);
-                    if (result == 1) {
-                        Toast.makeText(this, "Successfully updated note", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "Failed to update note", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(this, "Please enter note", Toast.LENGTH_SHORT).show();
-                }
+                doUpdate();
                  break;
             case R.id.delete_button:
+                doDelete();
                 break;
         }
+
+        if (id == updateButton.getId() || id == deleteButton.getId()) {
+            setResult(RESULT_OK);
+            finish();
+        }
     }
+
+    private void doUpdate() {
+        String editNoteText = noteContentTextInputEditText.getText() + "";
+        if (!editNoteText.trim().isEmpty()) {
+            data.setNoteContent(editNoteText);
+            int result = dbHelper.updateNote(data);
+            Log.d(TAG, "update result" + result);
+            if (result == 1) {
+                Toast.makeText(this, "Successfully updated note", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Failed to update note", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Please enter note", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void doDelete() {
+        int result = dbHelper.deleteNote(data.getId());
+        Log.d(TAG + "in doDelete", "Result > " + result);
+        if (result == 1) {
+            Toast.makeText(this, "Successfully deleted note", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Failed to delete note", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 }
