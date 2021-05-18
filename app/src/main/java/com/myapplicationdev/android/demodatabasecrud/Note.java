@@ -26,6 +26,6 @@ public class Note implements Serializable {
 
     @Override
     public String toString() {
-        return "ID: " + id + ", " + noteContent;
+        return String.format("ID: %-10s Content: %s\n", id, noteContent);
     }
 }

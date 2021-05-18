@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DemoDatabaseCRUD</string>
+    <string name="app_name">My Notes</string>
     <string name="insert_button">Insert</string>
     <string name="edit_button">Edit</string>
     <string name="retrieve_button">Retrieve</string>
@@ -7,5 +7,7 @@
     <string name="update_button">Update</string>
     <string name="delete_button">Delete</string>
     <string name="edit_note_id_value">ID</string>
-    <string name="edit_note_id_label">ID</string>
+    <string name="edit_note_id_label">Note ID</string>
+    <string name="display_content_label">Using Text</string>
+    <string name="display_content_label_list">Using List</string>
 </resources>

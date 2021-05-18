@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -17,12 +15,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // Database
     private static final String DATABASE_NAME = "simplenotes.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     // Table
     private static final String TABLE_NOTE = "note";
     // Columns
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NOTE_CONTENT = "note_content";
+    private static final String COLUMN_MODULE_NAME = "module_name";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -49,9 +48,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTE);
+        Log.d(TAG + " in onUpgrade",  "Old Version > " + oldVersion + " New Version > " + newVersion);
+        db.execSQL("ALTER TABLE " + TABLE_NOTE + " ADD COLUMN " +  COLUMN_MODULE_NAME + " TEXT ");
+        // db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTE);
+        // The Note table is already created
         // onCreate(db);
-        // db.execSQL();
     }
 
     public long insertNote(String noteContent) {

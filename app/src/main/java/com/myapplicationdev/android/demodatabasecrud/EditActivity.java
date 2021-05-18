@@ -16,7 +16,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = EditActivity.class.getSimpleName();
 
     // Database Helper
-    DBHelper dbHelper = new DBHelper(this);
+    private DBHelper dbHelper = new DBHelper(this);
 
     // Views
     private TextView noteIdTextView;
@@ -24,7 +24,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private Button updateButton, deleteButton;
 
     // Selected Note
-    private Note data;
+    private Note selectedNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +34,15 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         initViews();
 
         // Get Note Object
-        data = (Note) getIntent().getSerializableExtra("data");
+        selectedNote = (Note) getIntent().getSerializableExtra("data");
 
         // Set Text of Views
-        noteIdTextView.setText("ID:\n" + data.getId());
-        noteContentTextInputEditText.setText(data.getNoteContent());
+        noteIdTextView.setText("" + selectedNote.getId());
+        noteContentTextInputEditText.setText(selectedNote.getNoteContent());
+
+        // Update Title of Action Bar
+        getSupportActionBar().setTitle("Edit Note");
+
     }
 
     private void initViews() {
@@ -72,8 +76,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private void doUpdate() {
         String editNoteText = noteContentTextInputEditText.getText() + "";
         if (!editNoteText.trim().isEmpty()) {
-            data.setNoteContent(editNoteText);
-            int result = dbHelper.updateNote(data);
+            selectedNote.setNoteContent(editNoteText);
+            int result = dbHelper.updateNote(selectedNote);
             Log.d(TAG, "update result" + result);
             if (result == 1) {
                 Toast.makeText(this, "Successfully updated note", Toast.LENGTH_SHORT).show();
@@ -87,7 +91,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void doDelete() {
-        int result = dbHelper.deleteNote(data.getId());
+        int result = dbHelper.deleteNote(selectedNote.getId());
         Log.d(TAG + "in doDelete", "Result > " + result);
         if (result == 1) {
             Toast.makeText(this, "Successfully deleted note", Toast.LENGTH_SHORT).show();

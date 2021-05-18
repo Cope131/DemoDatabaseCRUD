@@ -9,25 +9,42 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:paddingTop="10sp"
-        android:paddingHorizontal="15dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_above="@id/input_linear_layout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="15dp"
+            android:layout_marginBottom="3dp"
+            android:textSize="13sp"
+            android:text="@string/display_content_label"/>
 
         <TextView
             android:id="@+id/db_content_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="15dp"
             android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:paddingHorizontal="15dp"
+            android:textSize="13sp"
+            android:text="@string/display_content_label_list"/>
 
         <ListView
             android:id="@+id/db_content_list_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="15dp"/>
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
+
+
 
     <LinearLayout
         android:id="@+id/input_linear_layout"
@@ -36,12 +53,33 @@
         android:orientation="vertical"
         android:layout_alignParentBottom="true">
 
+        <!-- Display Content Options -->
+        <CheckBox
+            android:id="@+id/display_text_content_check_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:text="@string/display_content_label"
+            android:checked="true"/>
+
+        <CheckBox
+            android:id="@+id/display_list_content_check_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:text="@string/display_content_label_list"
+            android:checked="true"/>
+
         <!-- Note Input -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="20dp"
-            android:paddingVertical="20dp"
+            android:paddingTop="15dp"
             android:hint="@string/hint_note_input">
 
             <com.google.android.material.textfield.TextInputEditText
